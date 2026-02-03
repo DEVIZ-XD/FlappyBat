@@ -3,10 +3,7 @@ using UnityEngine;
 public class Stump : MonoBehaviour
 {
     public static float speed;
-    void Start()
-    {
-        
-    }
+
 
     // Update is called once per frame
     void Update()

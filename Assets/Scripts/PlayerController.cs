@@ -6,6 +6,9 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField] private float rotatePower;
     [SerializeField] private float jumpSpeed;
+    [SerializeField] private float stumpSpeed;
+    [SerializeField] private float frogSpeed;
+    [SerializeField] private float backgroundSpeed;
     [SerializeField] private float speed;
     [SerializeField] private AudioClip jumpSound;
 
@@ -15,9 +18,14 @@ public class PlayerController : MonoBehaviour
  
     private void Start()
     {
-        Stump.speed = speed;
+        Stump.speed = stumpSpeed;
+        Frog.speed = frogSpeed;
+        ObjectsMovement.speed = speed;
+        BackgroundMovement.speed = backgroundSpeed;
         rb = GetComponent<Rigidbody>();
         source = GetComponent<AudioSource>();
+        rb.linearVelocity = Vector3.up * jumpSpeed;
+        source.PlayOneShot(jumpSound);
     }
 
     private void Update()
@@ -32,11 +40,14 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        SceneManager.LoadScene("Game");
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     private void OnTriggerEnter(Collider collision)
     {
-        Score.score++;
+        if (collision.CompareTag("trap"))
+        {
+            Score.score++;
+        }
     }
 }
