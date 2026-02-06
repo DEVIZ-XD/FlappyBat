@@ -30,7 +30,7 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetButtonDown("Jump"))
         {
             source.PlayOneShot(jumpSound);
             rb.linearVelocity = Vector3.up * jumpSpeed;
